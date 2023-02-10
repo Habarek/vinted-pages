@@ -15,7 +15,7 @@ const SignUp = () => {
   const fechToken = async () => {
     try {
       const response = await axios.post(
-        "lereacteur-vinted-api.herokuapp.com/user/signup",
+        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
         {
           // ne pas mettre le deuxieme 'email' entres {} car
           // on est en dehor du return qui veut dire qu'on est deja dans du JS, react comprendrais que c'est un objet
@@ -30,7 +30,6 @@ const SignUp = () => {
     } catch (error) {
       console.log(error.response);
     }
-    fechToken();
   };
 
   return (
@@ -44,6 +43,7 @@ const SignUp = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          fechToken();
         }}
       >
         <input
