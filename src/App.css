@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+body {
+  font-family: "Roboto";
+}
+/* -------------------------------------- */
+/*--------------- PAGE HOME-------------- */
+/* -------------------------------------- */
+header img {
+  width: 70px;
+}
+header {
+  background-color: rgb(228, 217, 217);
+  display: flex;
+}
+.container {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.vendre {
+  margin-top: 230px;
+  width: 380px;
+  height: 300px;
+  border: 1px solid red;
+  background-color: white;
+  padding: 40px;
+}
+.vendre p {
+  font-weight: bold;
+  font-size: 34px;
+  margin-bottom: 100px;
+}
+
+.vendre button {
+  font-size: 16px;
+  margin-bottom: 100px;
+}
+.vendre nav {
+  font-size: 14px;
+}
+.vendre p {
+  font-weight: bold;
+  font-size: 34px;
+  margin-bottom: 100px;
+}
+
+.vendre button {
+  font-size: 16px;
+  margin-bottom: 100px;
+}
+.vendre nav {
+  font-size: 14px;
+}
+
+.profils {
+  display: flex;
+}
+
+.photoDeProfil {
+  width: 30px;
+  height: 30px;
+  border-radius: 70px;
+}
+.photo {
+  width: 235px;
+  height: 358px;
+  object-fit: cover;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signup form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
