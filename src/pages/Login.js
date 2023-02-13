@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
-import token from "./SignUp";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,16 +22,27 @@ const Login = () => {
       );
       console.log(response.data);
 
-      if (response.data.token === token) {
-        Cookies.set("cookieLogin", token);
+      // pas besoin de comparé les token de l'inscription avec ceux de la connection
+      if (response.data.token) {
+        let token = response.data.token;
+        Cookies.set("cookieLogin", token, { expires: 7 });
         navigate("/");
       }
     } catch (error) {
       console.log(error.response.data);
-      // console.log(error.response.status);
-      if (error.response === "Unauthorized") {
+      {
+        if (error.response.data.message === "User not found")
+          setErrorMessage("Utilisateur non trouvé");
+      }
+
+      if (error.response.data.error === "Unauthorized") {
         setErrorMessage("Votre email ou votre mot de passe n'est pas valid.");
       }
+
+      // console.log(error.response.status);
+      // if (error.response.status === 401) {
+      //   setErrorMessage("Votre email ou votre mot de passe n'est pas valid.");
+      // }
     }
   };
 
@@ -63,7 +74,6 @@ const Login = () => {
         <button type="submit"> Se connecter</button>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </form>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
       <Link to="/signup">Pas encore de compte? Inscris-toi!</Link>
     </div>
