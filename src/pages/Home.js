@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import img from "../img/pageHome.jpg";
 
 const Home = () => {
   // State qui me sert à récupérer la data
@@ -34,12 +35,13 @@ const Home = () => {
   ) : (
     <div>
       <h1>Page Home</h1>
+
+      {/* <img src={img} alt="" srcset="" /> */}
       <div className="">
         <div className="container">
           <div className="vendre">
             <p>Prêts à faire du tri dans vos placards ?</p>
-            <button>Vends maintenant</button>
-            <nav>Découvrir comment ça marche</nav>
+            <button>Commencer à vendre</button>
           </div>
           {/* pour afficher les photo de profils */}
           {/* {data.offers.map((profils) => {

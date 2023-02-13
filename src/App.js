@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
 
 // import du composant Header que je met sous le ROUTER pour qu'il soir présent sur toutes mes pages
 import Header from "./components/Header";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/offer/:id" element={<Offer />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/publish" element={<Publish />} />
         </Routes>
       </Router>
     </div>
