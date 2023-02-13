@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import axios from "axios";
+import token from "./SignUp";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +21,17 @@ const Login = () => {
         }
       );
       console.log(response.data);
+
+      if (response.data.token === token) {
+        Cookies.set("cookieLogin", token);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error.response.data);
+      // console.log(error.response.status);
+      if (error.response === "Unauthorized") {
+        setErrorMessage("Votre email ou votre mot de passe n'est pas valid.");
+      }
     }
   };
 
@@ -30,6 +41,7 @@ const Login = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          connection();
         }}
       >
         <input
@@ -49,7 +61,9 @@ const Login = () => {
           }}
         />
         <button type="submit"> Se connecter</button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </form>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
       <Link to="/signup">Pas encore de compte? Inscris-toi!</Link>
     </div>
