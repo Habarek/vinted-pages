@@ -1,7 +1,7 @@
 import "./App.css";
 
 // Import des composant permettant d'avoir plusieurs pages
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 // import de mes pages
@@ -15,12 +15,14 @@ import Publish from "./pages/Publish";
 import Header from "./components/Header";
 
 function App() {
+  const [token, setToken] = useState(true);
+
   // créer le state token sur app pour qu'il puisse être
-  const [token, setToken] = useState();
+
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header token={token} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/offer/:id" element={<Offer />} />
@@ -32,7 +34,7 @@ function App() {
             path="/login"
             element={<Login token={token} setToken={setToken} />}
           />
-          <Route path="/publish" element={<Publish />} />
+          <Route path="/publish" element={<Publish token={token} />} />
         </Routes>
       </Router>
     </div>

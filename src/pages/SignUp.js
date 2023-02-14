@@ -10,7 +10,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = ({ token, setToken }) => {
   // ------------LES STATES------------
 
   //
@@ -38,7 +38,7 @@ const SignUp = () => {
       // lors de ma reqête je demande si token existe, si il existe je le stock dans "token"
       if (response.data.token) {
         // je stock la valeur dans la variable token
-        let token = response.data.token;
+        setToken(response.data.token);
 
         // je créer le cookie
         Cookies.set("token", token, { expires: 7 });

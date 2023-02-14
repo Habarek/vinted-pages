@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ token, setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const connection = async () => {
     try {
@@ -24,16 +24,15 @@ const Login = () => {
 
       // pas besoin de comparé les token de l'inscription avec ceux de la connection
       if (response.data.token) {
-        let token = response.data.token;
-        Cookies.set("cookieLogin", token, { expires: 7 });
+        setToken(response.data.token);
+        Cookies.set("token", token, { expires: 7 });
         navigate("/");
       }
     } catch (error) {
       console.log(error.response.data);
-      {
-        if (error.response.data.message === "User not found")
-          setErrorMessage("Utilisateur non trouvé");
-      }
+
+      if (error.response.data.message === "User not found")
+        setErrorMessage("Utilisateur non trouvé");
 
       if (error.response.data.error === "Unauthorized") {
         setErrorMessage("Votre email ou votre mot de passe n'est pas valid.");

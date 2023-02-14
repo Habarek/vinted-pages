@@ -34,8 +34,6 @@ const Home = () => {
     <p>Is Loading</p>
   ) : (
     <div>
-      <h1>Page Home</h1>
-
       {/* <img src={img} alt="" srcset="" /> */}
       <div className="">
         <div className="container">

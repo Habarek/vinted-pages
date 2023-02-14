@@ -20,8 +20,11 @@ const Header = () => {
           <button>Se connecter</button>
         </Link>
       </div>
+
       <div className="vente">
-        <button>Vends tes articles</button>
+        <Link to="/publish">
+          <button>Vends tes articles</button>
+        </Link>
       </div>
     </header>
   );

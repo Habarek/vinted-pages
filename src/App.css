@@ -165,3 +165,9 @@ header {
 .login form :nth-child(2) {
   margin-bottom: 50px;
 }
+
+.publication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
