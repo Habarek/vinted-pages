@@ -87,12 +87,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* Lien vers la page details
-        <Link to="/details">Aller vers la page details : </Link>
-        <a href=""></a> */}
-      {/* Lien vers /offer/123456789
-        <Link to={`/offer/${id}`}> Vers la page Offer</Link>  */}
     </div>
   );
 };

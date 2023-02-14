@@ -2,7 +2,7 @@
 
 // Importer useParams pour les routes?
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 // J'IMPORTE AXIOS POUR FAIRE LA REQUÊTE
 import axios from "axios";
@@ -43,7 +43,18 @@ const Offer = () => {
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <img src={data.product_image.secure_url} alt="" srcset="" />
+    <div classeName="offre">
+      <div>
+        <img src={data.product_image.secure_url} alt="" srcset="" />
+      </div>
+      <p>{data.product_price} €</p>
+      <p>{data.product_name}</p>
+      <p>{data.product_description}</p>
+      <p>{data.owner.account.username}</p>
+      <Link to="/payment">
+        <button>Acheter</button>
+      </Link>
+    </div>
   );
 };
 

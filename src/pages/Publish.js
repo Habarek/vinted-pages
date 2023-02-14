@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Publish = ({ token }) => {
@@ -11,46 +12,53 @@ const Publish = ({ token }) => {
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [picture, setPicture] = useState("");
+  const navigate = useNavigate();
 
-  return (
+  const handlePublish = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("condition", condition);
+      formData.append("city", city);
+      formData.append("brand", brand);
+      formData.append("size", size);
+      formData.append("color", color);
+      formData.append("picture", picture);
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (token) console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  return token ? (
     <div className="publication">
       <form
-        onSubmit={async (event) => {
+        onSubmit={(event) => {
           event.preventDefault();
-          try {
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("description", description);
-            formData.append("price", price);
-            formData.append("condition", condition);
-            formData.append("city", city);
-            formData.append("brand", brand);
-            formData.append("size", size);
-            formData.append("color", color);
-            formData.append("picture", picture);
-            const response = await axios.post(
-              "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
-              formData,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "content-Type": "multipart/form-data",
-                },
-              }
-            );
-            console.log(response);
-          } catch (error) {
-            console.log(error.message);
-          }
+          handlePublish();
         }}
       >
         <div>
+          {/* Pour faire afficher l'image sélectionner */}
+          {picture && <img src={URL.createObjectURL(picture)} alt="product" />}
+
           <p>Ajoute une photo</p>
           <input
-            value={picture}
             type="file"
             onChange={(event) => {
-              setPicture(event.target.files);
+              setPicture(event.target.files[0]);
             }}
           />
         </div>
@@ -67,13 +75,13 @@ const Publish = ({ token }) => {
 
         <div>
           <p>Décris ton article</p>
-          <input
+          <textarea
             value={description}
-            type="text"
+            type="textarea"
             onChange={(event) => {
               setDescription(event.target.value);
             }}
-          />
+          ></textarea>
         </div>
         <div>
           <p>marque</p>
@@ -135,9 +143,11 @@ const Publish = ({ token }) => {
             }}
           />
         </div>
-        {/* <input type="submit">Ajouter</input> */}
+        <button type="submit">Ajouter</button>
       </form>
     </div>
+  ) : (
+    navigate("/login")
   );
 };
 export default Publish;
